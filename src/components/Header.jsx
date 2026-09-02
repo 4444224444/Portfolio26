@@ -14,7 +14,7 @@ export default function Header({ activeTab, onOpenMenu }) {
         </div>
         <div className="header-right">
           <p className="desc-text">
-            웹과 그래픽, 영상 디자인을 기반으로 새로운 시각과 명확한 메시지를 담은 디자인을 추구하며, 아이디어의 방향을 시각적으로 풀어내고 사용자에게 자연스럽게 전달되는 결과물을 만들고자 합니다.
+            안녕하세요, 디자이너 정혜진입니다. 저는 웹과 그래픽, 영상 디자인을 기반으로 새로운 시각과 명확한 메시지를 담은 디자인을 추구하며, 아이디어의 방향을 시각적으로 풀어내고 사용자에게 자연스럽게 전달되는 결과물을 만들고자 합니다.
           </p>
         </div>
       </header>

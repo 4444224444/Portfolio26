@@ -1,31 +1,47 @@
 .footer {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
-  padding-top: 20px;
+  width: 100%;
+  padding-top: 80px;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: flex-end; /* 3개의 컬럼을 우측으로 밀어 정렬 */
 
-  .footer-col {
+  .footer-inner {
     display: flex;
-    flex-direction: column;
-    gap: 6px;
+    gap: 80px; /* 컬럼 간 간격 */
+    text-align: left;
 
-    .footer-title {
-      font-family: var(--font-head);
-      font-size: 13px;
-      font-weight: 400;
-      text-transform: uppercase;
-      margin-bottom: 4px;
-    }
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      min-width: 140px;
 
-    .footer-text {
-      font-family: var(--font-body);
-      font-size: 11px;
-      color: var(--text-secondary);
-      text-decoration: none;
+      .footer-title {
+        font-family: var(--font-head);
+        font-size: 18px;
+        font-weight: 400;
+        color: var(--accent-green); /* 이미지 속 라임/연두색 타이틀 */
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+      }
 
-      &.link:hover {
-        color: var(--text-primary);
-        text-decoration: underline;
+      .footer-text {
+        font-family: var(--font-body);
+        font-size: 14px;
+        color: var(--text-primary); /* 내용 글자는 흰색/밝은 톤 */
+        text-decoration: none;
+        line-height: 1;
+
+        &.link {
+          transition: opacity 0.2s ease;
+
+          &:hover {
+            opacity: 0.7;
+            text-decoration: underline;
+          }
+        }
       }
     }
   }
@@ -33,7 +49,11 @@
 
 @media (max-width: 992px) {
   .footer {
-    grid-template-columns: 1fr;
-    gap: 24px;
+    justify-content: flex-start; /* 모바일/패드에서는 왼쪽 정렬 */
+
+    .footer-inner {
+      flex-direction: column;
+      gap: 30px;
+    }
   }
 }

@@ -1,4 +1,5 @@
 import './NavigationModal.scss'
+import resumePdf from '../assets/jhjpf.pdf' 
 
 export default function NavigationModal({ isOpen, onClose, setActiveTab }) {
   if (!isOpen) return null
@@ -25,7 +26,14 @@ export default function NavigationModal({ isOpen, onClose, setActiveTab }) {
 
         <div className="modal-info-section">
           <div className="info-block">
-            <a href="#" className="resume-link">Resume Download</a>
+            {/* 2. href에 import한 변수를 넣고, download 속성을 추가합니다 */}
+            <a 
+              href={resumePdf} 
+              download="정혜진_이력서.pdf" 
+              className="resume-link"
+            >
+              Resume Download
+            </a>
           </div>
           <div className="info-block">
             <p>01094135028</p>

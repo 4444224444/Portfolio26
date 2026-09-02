@@ -2,66 +2,61 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  width: 100%;
   margin-bottom: 60px;
+  padding: 0;
+  text-align: left;
 
   .header-left {
     max-width: 60%;
+    text-align: left;
 
     .sub-title {
       font-family: var(--font-head);
-      font-size: 14px;
+      font-size: 22px;
       margin-bottom: 18px;
       letter-spacing: 0.5px;
+      text-align: left;
     }
 
     .main-title {
-      font-family: var(--font-body);
-      font-size: 48px;
+      font-family: var(--font-body); /* font-body에서 font-head(Michroma)로 수정 */
+      font-size: 92px;
       font-weight: 400;
-      line-height: 1.25;
-      letter-spacing: -0.5px;
+      line-height: 1;
+      letter-spacing: -2px;
+      text-align: left;
     }
   }
 
   .header-right {
-    max-width: 380px;
-    padding-top: 10px;
+    max-width: 500px;
+    padding-top: 80px;
+    text-align: left;
 
     .desc-text {
-      font-size: 12px;
+      font-size: 18px;
       font-weight: 300;
       line-height: 1.65;
-      color: var(--text-secondary);
+      color: var(--accent-green);
       word-break: keep-all;
+      text-align: left;
     }
   }
 }
 
-@media (max-width: 992px) {
-  .header {
-    flex-direction: column;
-    gap: 20px;
-
-    .header-left, .header-right {
-      max-width: 100%;
-    }
-
-    .header-left .main-title {
-      font-size: 32px;
-    }
-  }
-}
-
-
-/* 기존 .header 스타일 유지 후 하단에 추가 */
-
+/* 서브페이지 전용 헤더 (About, 2026, 2025 등) */
 .sub-header {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
+  width: 100%;
   margin-bottom: 40px;
 
   .sub-title {
     font-family: var(--font-head);
     font-size: 14px;
+    text-align: left;
   }
 
   .hamburger-btn {
@@ -82,6 +77,21 @@
 
     &:hover span {
       opacity: 0.7;
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .header {
+    flex-direction: column;
+    gap: 20px;
+
+    .header-left, .header-right {
+      max-width: 100%;
+    }
+
+    .header-left .main-title {
+      font-size: 32px;
     }
   }
 }

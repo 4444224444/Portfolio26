@@ -1,44 +1,61 @@
 import { useState, useRef } from 'react'
 import './Portfolio2026.scss'
 
-// 룩북 데이터 구조 (필요에 따라 이미지 경로 및 내용 수정)
+// 🎬 동영상 import
+import video1 from '../assets/4-1.MP4'
+import video2 from '../assets/4-2.MP4'
+import video3 from '../assets/4-3.MP4'
+import video4 from '../assets/4-4.MP4'
+import video5 from '../assets/4-5.MP4'
+
+// 룩북 데이터 구조 (모든 카테고리에 linkUrl 추가)
 const PORTFOLIO_DATA = {
   'lookbook-1': {
-    category: '모델 촬영 · 코디 참여 · 콘텐츠 제작',
-    title: '여성 쇼핑몰 멜타 SS\n슬리브리스 룩북',
+    category: '모델 촬영 · 코디 참여 · 콘텐츠 제작 및 업로드',
+    title: '여성 쇼핑몰 멜타 SS\n롱슬리브 룩북',
     images: [
-      'https://via.placeholder.com/600x800/ffffff/000000?text=LookBook+1+-+Img+1',
-      'https://via.placeholder.com/600x800/eeeeee/000000?text=LookBook+1+-+Img+2',
-      'https://via.placeholder.com/600x800/dddddd/000000?text=LookBook+1+-+Img+3',
-    ]
+      new URL('../assets/1-1.jpg', import.meta.url).href,
+      new URL('../assets/1-2.jpg', import.meta.url).href,
+      new URL('../assets/1-3.jpg', import.meta.url).href,
+      new URL('../assets/1-4.jpg', import.meta.url).href,
+      new URL('../assets/1-5.jpg', import.meta.url).href
+    ],
+    linkUrl: 'https://www.instagram.com/merta.co.kr/' // 🔗 이동할 링크 주소
   },
   'lookbook-2': {
-    category: '기획 · 디자인 · 웹 매거진',
-    title: '여성 쇼핑몰 멜타 SS\n아우터 룩북',
+    category: '모델 촬영 · 코디 참여 · 콘텐츠 제작 및 업로드',
+    title: '여성 쇼핑몰 멜타 SS\n코디 룩북',
     images: [
-      'https://via.placeholder.com/600x800/e0e0e0/000000?text=LookBook+2+-+Img+1',
-      'https://via.placeholder.com/600x800/cccccc/000000?text=LookBook+2+-+Img+2',
-    ]
+      new URL('../assets/2-1.jpg', import.meta.url).href,
+      new URL('../assets/2-2.jpg', import.meta.url).href,
+      new URL('../assets/2-3.jpg', import.meta.url).href,
+      new URL('../assets/2-4.jpg', import.meta.url).href,
+      new URL('../assets/2-5.jpg', import.meta.url).href,
+      new URL('../assets/2-6.jpg', import.meta.url).href,
+      new URL('../assets/2-7.jpg', import.meta.url).href
+    ],
+    linkUrl: 'https://www.instagram.com/merta.co.kr/' // 🔗 이동할 링크 주소
   },
   'lookbook-3': {
-    category: '브랜딩 · 촬영 연출',
-    title: '여성 쇼핑몰 멜타 SS\n악세서리 룩북',
+    category: '모델 촬영 · 코디 참여 · 콘텐츠 제작 및 업로드',
+    title: '여성 쇼핑몰 멜타 SS\n신상 룩북',
     images: [
-      'https://via.placeholder.com/600x800/d5d5d5/000000?text=LookBook+3+-+Img+1',
-      'https://via.placeholder.com/600x800/bbbbbb/000000?text=LookBook+3+-+Img+2',
-    ]
+      new URL('../assets/3-1.jpg', import.meta.url).href,
+      new URL('../assets/3-2.jpg', import.meta.url).href
+    ],
+    linkUrl: 'https://www.instagram.com/merta.co.kr/' // 🔗 이동할 링크 주소
   },
   'short-form': {
-    category: '숏폼 영상 · 릴스 콘텐츠',
-    title: '26SS 멜타 트렌드\n숏폼 컬렉션',
-    images: [
-      'https://via.placeholder.com/600x800/aaaaaa/000000?text=Short-Form+Cover',
-    ]
+    category: '모델 촬영 · 코디 참여 · 콘텐츠 제작 및 업로드',
+    title: '26 신상 멜타\nSNS 업로드 숏폼',
+    videos: [video1, video2, video3, video4, video5],
+    linkUrl: 'https://www.instagram.com/merta.co.kr/reels/' // 🔗 인스타 릴스 주소
   }
 }
 
 export default function Portfolio2026() {
   const [selectedCategory, setSelectedCategory] = useState('lookbook-1')
+  const [activeVideo, setActiveVideo] = useState(null)
   const currentData = PORTFOLIO_DATA[selectedCategory]
 
   // 마우스 드래그 스크롤 제어를 위한 Ref
@@ -46,10 +63,12 @@ export default function Portfolio2026() {
   const isMouseDown = useRef(false)
   const startX = useRef(0)
   const scrollLeft = useRef(0)
+  const isDragging = useRef(false)
 
   // 드래그 이벤트 핸들러
   const handleMouseDown = (e) => {
     isMouseDown.current = true
+    isDragging.current = false
     startX.current = e.pageX - sliderRef.current.offsetLeft
     scrollLeft.current = sliderRef.current.scrollLeft
   }
@@ -62,8 +81,24 @@ export default function Portfolio2026() {
     if (!isMouseDown.current) return
     e.preventDefault()
     const x = e.pageX - sliderRef.current.offsetLeft
-    const walk = (x - startX.current) * 1.5 // 드래그 속도 조절
+    const walk = (x - startX.current) * 1.5
+
+    if (Math.abs(x - startX.current) > 5) {
+      isDragging.current = true
+    }
+
     sliderRef.current.scrollLeft = scrollLeft.current - walk
+  }
+
+  // 🎬 비디오 클릭 시 전체화면 모달 열기
+  const handleVideoClick = (vidUrl) => {
+    if (isDragging.current) return
+    setActiveVideo(vidUrl)
+  }
+
+  // ❌ 모달 닫기
+  const closeModal = () => {
+    setActiveVideo(null)
   }
 
   return (
@@ -107,23 +142,72 @@ export default function Portfolio2026() {
         </nav>
       </div>
 
-      {/* 우측 드래그 가능한 이미지 갤러리 */}
-      <div 
-        className="right-section gallery-slider"
-        ref={sliderRef}
-        onMouseDown={handleMouseDown}
-        onMouseLeave={handleMouseLeaveOrUp}
-        onMouseUp={handleMouseLeaveOrUp}
-        onMouseMove={handleMouseMove}
-      >
-        <div className="gallery-track">
-          {currentData.images.map((imgUrl, index) => (
-            <div key={index} className="image-card">
-              <img src={imgUrl} alt={`Lookbook item ${index + 1}`} draggable="false" />
-            </div>
-          ))}
+      {/* 우측 미디어 갤러리 영역 */}
+      <div className="right-section-wrapper">
+        <div 
+          className="right-section gallery-slider"
+          ref={sliderRef}
+          onMouseDown={handleMouseDown}
+          onMouseLeave={handleMouseLeaveOrUp}
+          onMouseUp={handleMouseLeaveOrUp}
+          onMouseMove={handleMouseMove}
+        >
+          <div className="gallery-track">
+            {currentData.videos ? (
+              currentData.videos.map((vidUrl, index) => (
+                <div 
+                  key={`vid-${index}`} 
+                  className="video-card"
+                  onClick={() => handleVideoClick(vidUrl)}
+                >
+                  <video 
+                    src={vidUrl} 
+                    autoPlay 
+                    loop 
+                    muted 
+                    playsInline 
+                  />
+                </div>
+              ))
+            ) : (
+              currentData.images.map((imgUrl, index) => (
+                <div key={`img-${index}`} className="image-card">
+                  <img src={imgUrl} alt={`Lookbook item ${index + 1}`} draggable="false" />
+                </div>
+              ))
+            )}
+          </div>
         </div>
+
+        {/* 🔗 모든 메뉴 공통: linkUrl 정보가 있으면 하단에 View More 버튼 표시 */}
+        {currentData.linkUrl && (
+          <div className="view-more-container">
+            <a 
+              href={currentData.linkUrl} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="view-more-btn"
+            >
+              View More ↗
+            </a>
+          </div>
+        )}
       </div>
+
+      {/* 🎬 전체화면 동영상 팝업 모달 */}
+      {activeVideo && (
+        <div className="video-modal-overlay" onClick={closeModal}>
+          <div className="video-modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="close-btn" onClick={closeModal}>✕</button>
+            <video 
+              src={activeVideo} 
+              autoPlay 
+              controls 
+              playsInline 
+            />
+          </div>
+        </div>
+      )}
     </div>
   )
 }

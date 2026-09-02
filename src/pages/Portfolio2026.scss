@@ -1,7 +1,8 @@
 .portfolio-2026-container {
   display: flex;
+  font-family: var(--font-body);
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center; /* 🔥 전체 좌/우 세로 중앙 정렬 */
   gap: 60px;
   width: 100%;
   min-height: calc(100vh - 240px);
@@ -12,39 +13,49 @@
     width: 38%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
+    justify-content: center; /* 🔥 메뉴와 제목을 세로 중앙으로 모음 */
+    align-items: flex-start; /* 🔥 내부 요소 왼쪽 정렬 */
+    text-align: left; /* 🔥 모든 텍스트 왼쪽 정렬 */
     min-height: 500px;
 
     .title-area {
+      text-align: left; /* 🔥 텍스트 왼쪽 정렬 명시 */
+
       .category-tag {
-        font-size: 14px;
+        font-size: 18px;
+        font-family: var(--font-body);
         color: var(--text-secondary);
         font-weight: 400;
         letter-spacing: -0.2px;
       }
 
       .project-title {
-        font-size: 38px;
-        font-weight: 700;
+        font-size: 48px;
+        font-weight: 400;
         line-height: 1.3;
         margin-top: 16px;
-        color: var(--accent-green); // 노란빛 나는 강조 색상 적용
-        letter-spacing: -0.5px;
+        font-family: var(--font-body);
+        color: var(--accent-green);
+        letter-spacing: -1px;
       }
     }
 
     .menu-list {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      align-items: flex-start; /* 🔥 버튼들 왼쪽 라인 맞춤 */
       gap: 16px;
       margin-top: 60px;
 
       button {
-        font-family: var(--font-head);
+        font-family: var(--font-body);
         font-size: 18px;
         color: var(--text-secondary);
+        text-align: left; /* 🔥 버튼 내부 텍스트 왼쪽 정렬 */
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
         transition: color 0.2s, transform 0.2s;
 
         &:hover {
@@ -52,8 +63,7 @@
         }
 
         &.active {
-          color: var(--accent-green); // 활성화 메뉴 라임/노란색
-          font-weight: 700;
+          color: var(--accent-green);
         }
       }
     }
@@ -80,11 +90,13 @@
     .gallery-track {
       display: flex;
       gap: 24px;
+      align-items: center; /* 동영상/이미지 카드 수직 중앙 정렬 */
 
+      /* 이미지 카드 (룩북용) */
       .image-card {
         flex-shrink: 0;
-        width: 380px;
-        height: 520px;
+        width: 500px;
+        height: 650px;
         border-radius: 8px;
         overflow: hidden;
         background-color: #222;
@@ -93,9 +105,124 @@
           width: 100%;
           height: 100%;
           object-fit: cover;
-          pointer-events: none; // 이미지 드래그 방지
+          pointer-events: none; /* 이미지 드래그 방지 */
         }
       }
+
+      /* 🎬 동영상 카드 (숏폼용 - 원본 비율 유지) */
+      .video-card {
+        flex-shrink: 0;
+        height: 650px; /* 기존 카드들과 전체 세로 높이 맞춤 */
+        width: auto;   /* 가로 비율은 동영상 원본에 맞게 자동 조절 */
+        border-radius: 8px;
+        overflow: hidden;
+        background-color: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        video {
+          height: 100%;
+          width: auto; /* 비율 왜곡 방지 */
+          object-fit: contain; /* 원본 비율대로 영역 안에 맞춤 */
+          pointer-events: none; /* 비디오 클릭/드래그 시 스크롤 방해 금지 */
+        }
+      }
+    }
+  }
+}
+
+
+/* 🎬 비디오 전체화면 모달 스타일 */
+.video-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+
+  .video-modal-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .close-btn {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 28px;
+      cursor: pointer;
+      z-index: 10;
+      transition: transform 0.2s;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+
+    video {
+      max-width: 100%;
+      max-height: 85vh;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      outline: none;
+    }
+  }
+}
+
+
+/* 우측 슬라이더와 View More 버튼을 포함하는 래퍼 */
+.right-section-wrapper {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .right-section {
+    width: 100%; // 부모 너비에 맞춤
+  }
+
+  /* View More 버튼 스타일 */
+  .view-more-container {
+    display: flex;
+    justify-content: flex-end; /* 오른쪽 정렬 */
+    padding-right: 12px;
+
+    .view-more-btn {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      transition: color 0.2s, transform 0.2s;
+
+      &:hover {
+        color: var(--accent-green);
+        transform: translateY(-2px);
+      }
+    }
+  }
+}
+
+/* 모바일 분기문 수정 (mediaquery 내부) */
+@media (max-width: 1024px) {
+  .right-section-wrapper {
+    width: 100%;
+
+    .view-more-container {
+      justify-content: center; /* 모바일에서는 가운데 정렬 */
     }
   }
 }
@@ -104,6 +231,7 @@
 @media (max-width: 1024px) {
   .portfolio-2026-container {
     flex-direction: column;
+    align-items: flex-start; /* 모바일에서는 다시 상단 정렬 */
     gap: 40px;
 
     .left-section {
@@ -118,9 +246,15 @@
     .right-section {
       width: 100%;
 
-      .gallery-track .image-card {
-        width: 280px;
-        height: 380px;
+      .gallery-track {
+        .image-card {
+          width: 280px;
+          height: 380px;
+        }
+
+        .video-card {
+          height: 380px; /* 모바일 모드 세로 높이 동일 조정 */
+        }
       }
     }
   }

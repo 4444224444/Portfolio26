@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import NavigationModal from './components/NavigationModal'
@@ -9,20 +9,28 @@ import Portfolio2025 from './pages/Portfolio2025'
 import './styles/main.scss'
 
 function App() {
-  const [activeTab, setActiveTab] = useState('home')
+  // 1. 초기 상태값을 sessionStorage에서 가져옵니다. (없으면 기본값 'home')
+  const [activeTab, setActiveTab] = useState(() => {
+    return sessionStorage.getItem('activeTab') || 'home'
+  })
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  // 2. activeTab이 변경될 때마다 sessionStorage에 최신 탭 저장
+  useEffect(() => {
+    sessionStorage.setItem('activeTab', activeTab)
+  }, [activeTab])
 
   return (
     <div 
       className="app-container" 
       style={{ 
-        padding: '60px 80px', 
+        padding: '60px 50px', 
         minHeight: '100vh', 
         display: 'flex', 
         flexDirection: 'column', 
         justifyContent: 'space-between',
         width: '100%',
-        maxWidth: '100%',
+        maxWidth: 'none',
         boxSizing: 'border-box'
       }}
     >

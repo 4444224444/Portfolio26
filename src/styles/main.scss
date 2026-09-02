@@ -1,14 +1,16 @@
 /* main.scss 맨 상단에 추가 */
-html, body, #root, .app-container {
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-* {
+html, body, #root {
+  width: 100%;
+  max-width: 100%;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.app-container {
+  width: 100% !important;
+  max-width: 100% !important; /* 최대 너비 제한 강제 해제 */
+  margin: 0 !important;
 }
 
 
@@ -16,8 +18,8 @@ html, body, #root, .app-container {
   --bg-color: #111111;
   --text-primary: #ffffff;
   --text-secondary: #9a9a9a;
-  --accent-green: #d6f06a;
-  --line-color: rgba(255, 255, 255, 0.22);
+  --accent-green: #F0FFB2;
+  --line-color: rgba(216, 216, 216, 0.22);
   --font-head: 'Michroma', sans-serif;
   --font-body: 'Pretendard', sans-serif;
 }
@@ -28,6 +30,7 @@ body {
   font-family: var(--font-body);
   min-height: 100vh;
   overflow-x: hidden;
+  text-align: left; 
 }
 
 button {
