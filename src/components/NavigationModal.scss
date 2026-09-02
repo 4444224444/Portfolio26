@@ -1,0 +1,105 @@
+.nav-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg-color);
+  z-index: 999;
+  padding: 60px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+
+  .nav-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .modal-logo {
+      font-family: var(--font-head);
+      font-size: 14px;
+      color: var(--text-primary);
+    }
+
+    .close-btn {
+      font-size: 32px;
+      line-height: 1;
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  .nav-modal-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 40px;
+
+    .modal-menu-list {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+
+      button {
+        font-family: var(--font-head);
+        font-size: 44px;
+        font-weight: 400;
+        color: var(--text-primary);
+        letter-spacing: 1px;
+        transition: opacity 0.2s, transform 0.2s;
+
+        &:hover {
+          opacity: 0.7;
+          transform: translateX(10px);
+        }
+      }
+    }
+
+    .modal-info-section {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      text-align: left;
+
+      .info-block {
+        font-family: var(--font-head);
+        font-size: 12px;
+        line-height: 1.8;
+        color: var(--text-secondary);
+
+        .resume-link {
+          color: var(--text-primary);
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .nav-modal-overlay {
+    padding: 40px 30px;
+
+    .nav-modal-content {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 50px;
+
+      .modal-menu-list button {
+        font-size: 32px;
+      }
+    }
+  }
+}

@@ -1,0 +1,52 @@
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 60px;
+  border-top: 1px solid var(--line-color);
+  /* 양옆 border 제거 명시 */
+  border-left: none;
+  border-right: none;
+
+  .nav-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 0; /* 양옆 패딩 없이 상하 패딩만 유지 */
+    border-bottom: 1px solid var(--line-color);
+    border-left: none;
+    border-right: none;
+    cursor: pointer;
+    transition: opacity 0.2s ease, padding-left 0.3s ease;
+
+    &:hover {
+      opacity: 0.8;
+      padding-left: 10px;
+    }
+
+    .nav-label {
+      font-family: var(--font-head);
+      font-size: 42px;
+      font-weight: 400;
+      letter-spacing: 1px;
+    }
+
+    .nav-number {
+      font-family: var(--font-head);
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--accent-green);
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .nav-list .nav-item {
+    .nav-label {
+      font-size: 30px;
+    }
+    .nav-number {
+      font-size: 20px;
+    }
+  }
+}

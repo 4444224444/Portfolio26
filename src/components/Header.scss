@@ -1,0 +1,87 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 60px;
+
+  .header-left {
+    max-width: 60%;
+
+    .sub-title {
+      font-family: var(--font-head);
+      font-size: 14px;
+      margin-bottom: 18px;
+      letter-spacing: 0.5px;
+    }
+
+    .main-title {
+      font-family: var(--font-body);
+      font-size: 48px;
+      font-weight: 400;
+      line-height: 1.25;
+      letter-spacing: -0.5px;
+    }
+  }
+
+  .header-right {
+    max-width: 380px;
+    padding-top: 10px;
+
+    .desc-text {
+      font-size: 12px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      word-break: keep-all;
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .header {
+    flex-direction: column;
+    gap: 20px;
+
+    .header-left, .header-right {
+      max-width: 100%;
+    }
+
+    .header-left .main-title {
+      font-size: 32px;
+    }
+  }
+}
+
+
+/* 기존 .header 스타일 유지 후 하단에 추가 */
+
+.sub-header {
+  align-items: center;
+  margin-bottom: 40px;
+
+  .sub-title {
+    font-family: var(--font-head);
+    font-size: 14px;
+  }
+
+  .hamburger-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 18px;
+    cursor: pointer;
+
+    span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: var(--text-primary);
+      transition: opacity 0.2s;
+    }
+
+    &:hover span {
+      opacity: 0.7;
+    }
+  }
+}

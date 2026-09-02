@@ -1,0 +1,38 @@
+/* main.scss 맨 상단에 추가 */
+html, body, #root, .app-container {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+:root {
+  --bg-color: #111111;
+  --text-primary: #ffffff;
+  --text-secondary: #9a9a9a;
+  --accent-green: #d6f06a;
+  --line-color: rgba(255, 255, 255, 0.22);
+  --font-head: 'Michroma', sans-serif;
+  --font-body: 'Pretendard', sans-serif;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: inherit;
+}
